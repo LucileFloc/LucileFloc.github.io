@@ -1,5 +1,6 @@
 <body>
-    Helo world
+    <h1>Nombre d'empreintes totales</h1>
+    <p id="nb"></p>
 </body>
 <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
 <script>
@@ -13,7 +14,8 @@
   };
   firebase.initializeApp(config);
     firebase.firestore().collection('empreintes').get().then(snap => {
+        document.getElementById("nb").innerText = snap.size
         console.log(snap.size)
-        
+
     });
 </script>
