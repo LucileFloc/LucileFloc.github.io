@@ -1,9 +1,19 @@
 <body>
     Helo world
 </body>
+<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
 <script>
-    db.collection('empreintes').get().then(snap => {
-        console.log(snap)
-    res.status(200).send({length: snap.size});
+    var config = {
+    apiKey: "AIzaSyBen2vjnOlbc90CFK7bhs26fyYrI2b7c3g",
+    authDomain: "prm2-d4618.firebaseapp.com",
+    databaseURL: "https://prm2-d4618.firebaseio.com",
+    projectId: "prm2-d4618",
+    storageBucket: "",
+    messagingSenderId: "792401451959"
+  };
+  firebase.initializeApp(config);
+    firebase.firestore().collection('empreintes').get().then(snap => {
+        console.log(snap.size)
+        
     });
 </script>
