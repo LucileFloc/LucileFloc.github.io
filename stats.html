@@ -1,3 +1,9 @@
 <body>
     Helo world
 </body>
+<script>
+    db.collection('empreintes').get().then(snap => {
+        console.log(snap)
+    res.status(200).send({length: snap.size});
+    });
+</script>
