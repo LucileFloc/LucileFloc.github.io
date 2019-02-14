@@ -15,12 +15,19 @@
     storageBucket: "",
     messagingSenderId: "792401451959"
   };
+  tab = []
   firebase.initializeApp(config);
-    firebase.firestore().collection('empreintes').get().then(snap => {
-        console.log(snap.docs)
-        snap.docs.foreach(e => {
-            console.log(e.data().value)
+    firebase.firestore().collection("empreintes").get()
+    .then(snap => {
+        console.log(snap);
+        snap.forEach(doc => {
+            if(!tab[doc.data().cle]) {
+                tab[doc.data().cle] = 1
+            } else {
+                tab[doc.data().cle] = tab[doc.data().cle] + 1
+            }
         })
-        document.getElementById("nb").innerText = snap.size
+        document.getElementById("nb").innerText = tab.length
+        console.log(tab)
     });
 </script>
