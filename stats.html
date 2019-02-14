@@ -1,9 +1,12 @@
 <body>
     <h1>Nombre d'empreintes totales</h1>
     <p id="nb"></p>
+    <h1>Nombre de collisions OU même utilisateur ayant inseré plusieurs fois son empreinte</h1>
+    <p id=""></p>
 </body>
 <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
 <script>
+
     var config = {
     apiKey: "AIzaSyBen2vjnOlbc90CFK7bhs26fyYrI2b7c3g",
     authDomain: "prm2-d4618.firebaseapp.com",
@@ -14,8 +17,10 @@
   };
   firebase.initializeApp(config);
     firebase.firestore().collection('empreintes').get().then(snap => {
+        console.log(snap.docs)
+        snap.docs.foreach(e => {
+            console.log(e.data().value)
+        })
         document.getElementById("nb").innerText = snap.size
-        console.log(snap.size)
-
     });
 </script>
