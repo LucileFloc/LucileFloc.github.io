@@ -2,7 +2,9 @@
     <h1>Nombre d'empreintes totales</h1>
     <p id="nb"></p>
     <h1>Nombre de collisions OU même utilisateur ayant inseré plusieurs fois son empreinte</h1>
-    <p id=""></p>
+    <p id="xoxo"></p>
+    <h1>Détails (Empreintes, nombres de visite d'un utilisateur ou collision</h1>
+    <div id="lala"></div>
 </body>
 <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
 <script>
@@ -15,19 +17,32 @@
     storageBucket: "",
     messagingSenderId: "792401451959"
   };
-  tab = []
+  var tab = []
   firebase.initializeApp(config);
+  j = 0
+  xoxo = 0
     firebase.firestore().collection("empreintes").get()
     .then(snap => {
-        console.log(snap);
         snap.forEach(doc => {
             if(!tab[doc.data().cle]) {
+                j = j + 1
                 tab[doc.data().cle] = 1
             } else {
                 tab[doc.data().cle] = tab[doc.data().cle] + 1
             }
         })
-        document.getElementById("nb").innerText = tab.length
-        console.log(tab)
+        html = ''
+        for(i in tab) {
+            if (i !== "") {
+                if(tab[i] > 1) {
+                    xoxo++
+                }
+                html += `<p>Empreinte ${i}: Nombre de visite d'un unique utilisateur ou collision: ${tab[i]}</p>`
+            }
+        }
+        document.getElementById('lala').innerHTML =  html
+        document.getElementById("nb").innerText = j - 1
+        document.getElementById("xoxo").innerText = xoxo
+        
     });
 </script>
